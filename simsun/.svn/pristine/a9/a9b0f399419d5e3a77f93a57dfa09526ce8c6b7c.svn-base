@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="@drawable/login_background">
+    
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/top_background" 
+        >
+        
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/jsk_fh"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true" 
+            android:onClick="btnClick"
+            />
+        
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dizhibu_top"
+            android:layout_centerInParent="true" 
+            />
+        
+    </RelativeLayout>
+    
+    
+     <RelativeLayout
+        android:id="@+id/set"
+        android:layout_margin="5dp"
+        android:layout_below="@+id/top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/klxg_background" 
+        >
+        <ImageView
+            android:id="@+id/setTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/lianxiren_top" 
+            />
+        
+        <LinearLayout
+            android:layout_below="@+id/setTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" 
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/lianxiren_07"
+                    android:layout_gravity="center_vertical" 
+                    />
+                <EditText
+                    android:id="@+id/lxrxm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/klsz_input_background" 
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:hint="请输入姓名"
+                    android:singleLine="true"
+                    />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" 
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/lianxiren_11"
+                    android:layout_gravity="center_vertical" 
+                    />
+                <EditText
+                    android:id="@+id/lxrdh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/klsz_input_background" 
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:numeric="integer"
+                    android:hint="请输入电话"
+                    android:singleLine="true"
+                    />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" 
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/lianxiren_14"
+                    android:layout_gravity="center_vertical" 
+                    />
+                <EditText
+                    android:id="@+id/lxryx"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/klsz_input_background" 
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:inputType="text"
+                    android:hint="请输入邮箱"
+                    />
+            </LinearLayout>
+            
+           	<LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" 
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/lianxiren_23"
+                    android:layout_gravity="center_vertical" 
+                    />
+                
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical" 
+                    >
+                    <RadioGroup
+                        android:id="@+id/rg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" 
+                        android:gravity="center_vertical"
+                        >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/lianxiren_17" 
+                        />
+                    <RadioButton
+                        android:id="@+id/zhuguan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" 
+                        android:checked="true"
+                        />
+                    
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/lianxiren_20" 
+                        />
+                    <RadioButton
+                        android:id="@+id/jingbanren"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" 
+                        />
+                    </RadioGroup>
+                </LinearLayout>
+            </LinearLayout>
+            
+			
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="10dp"
+                >
+                <ImageView
+                    android:id="@+id/ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/kl_ok"
+                    android:onClick="btnClick"
+                    />
+                
+            </LinearLayout>
+            
+        </LinearLayout>
+    </RelativeLayout>
+    
+    
+    
+        <RelativeLayout
+        android:id="@+id/update"
+        android:layout_margin="5dp"
+        android:layout_below="@+id/set"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/klxg_background" 
+        >
+        <ImageView
+            android:id="@+id/updateTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/lianxiren_29" 
+            />
+        
+        <LinearLayout
+            android:layout_below="@+id/updateTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            
+			<ListView
+			    android:id="@+id/lianxirenlistView"
+			    android:layout_marginTop="20dp"
+			    android:layout_marginLeft="25dp"
+			    android:layout_marginRight="25dp"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    >
+			    
+			</ListView>
+            
+        </LinearLayout>
+        
+        
+        
+        
+        
+    </RelativeLayout>
+    
+    
+</RelativeLayout>

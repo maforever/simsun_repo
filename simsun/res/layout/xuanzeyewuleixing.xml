@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/xuanzheshoukuanren_backgroudn" 
+    
+  	>
+    <FrameLayout
+    	android:id="@+id/slideout_placeholder"
+    	android:layout_width="match_parent"
+    	android:layout_height="match_parent"     
+        >
+        
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        >
+    <TextView
+        android:id="@+id/top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="选择业务种类"
+        android:textSize="25dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="30dp"
+        />
+    
+	<RelativeLayout
+		android:layout_below="@+id/top" 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    >
+		    <ListView
+	    android:layout_alignParentRight="true"
+        android:id="@+id/listView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+		android:layout_margin="20dp"
+		android:listSelector="@drawable/index_gridview_selector"    
+		android:dividerHeight="2dp"
+		android:divider="#ffffff"
+        >	    
+    </ListView>
+	</RelativeLayout>
+        
+    </RelativeLayout>
+    </FrameLayout>
+
+        <ImageView
+        android:id="@+id/slidedout_cover"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="fitXY" />
+</AbsoluteLayout>

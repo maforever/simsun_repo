@@ -1,0 +1,46 @@
+package com.zhaori.simsun.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.zhaori.simsun.dbopenhelper.DBOpenHelper;
+import com.zhaori.simsun.model.Contact;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+public class ContactService {
+	private SQLiteDatabase db = null;
+	private DBOpenHelper openHelper;
+	public ContactService(Context context) {
+		openHelper = new DBOpenHelper(context);
+		db = openHelper.getReadableDatabase();
+	}
+	
+	public void addContact(Contact c) {
+		db.execSQL("insert into contacts (username, email, phone, examine, app_username) values(?, ?, ?, ?, ?)", new String[]{c.getUsername(), c.getEmail(), c.getPhone(),String.valueOf(c.getExamine()), c.getApp_username()});
+	}
+	
+	public ArrayList<Contact> listContacts(String app_username) {
+		ArrayList<Contact> contacts = new ArrayList<Contact>();
+		Contact c = null;
+		Cursor cursor = db.rawQuery("select * from contacts where app_username = ?", new String[]{app_username});
+		while(cursor.moveToNext()) {
+			c = new Contact();
+			c.setApp_username(app_username);
+			c.setContrac_id(cursor.getInt(cursor.getColumnIndex("contact_id")));
+			c.setEmail(cursor.getString(cursor.getColumnIndex("email")));
+			c.setPhone(cursor.getString(cursor.getColumnIndex("phone")));
+			c.setUsername(cursor.getString(cursor.getColumnIndex("username")));
+			c.setExamine(cursor.getInt(cursor.getColumnIndex("examine")));
+			contacts.add(c);
+		}
+		return contacts;
+		
+	}
+	
+	public void closeDB() {
+		this.db.close();
+	}
+}

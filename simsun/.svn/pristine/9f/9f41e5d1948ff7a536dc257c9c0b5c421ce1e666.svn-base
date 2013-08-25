@@ -1,0 +1,37 @@
+package com.zhaori.simsun.utils;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import android.util.Log;
+
+public class HttpUtils {
+	
+	public static boolean login(String username, String password) {
+		String urlStr = "http://www.pop-res.com:8888/login?username=" + username + "&password=" + password;
+		Log.i("a", "访问地址: " + urlStr);
+		try {
+			URL url = new URL(urlStr);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setConnectTimeout(3000);
+			if(conn.getResponseCode() == 200) {
+				InputStream is = conn.getInputStream();
+				String result = StreamTool.readStream(is);
+				Log.i("a", "登录后获得的短信息:" + result);
+				if(result != null && "-1,-1".equals(result)) {
+					return false;
+				}
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		Log.i("a", "登录失败:");
+		return false;
+	}
+}

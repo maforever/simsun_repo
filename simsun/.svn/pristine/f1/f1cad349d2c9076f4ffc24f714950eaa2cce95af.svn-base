@@ -1,0 +1,220 @@
+package com.zhaori.simsun;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.zhaori.simsun.model.Payee;
+import com.zhaori.simsun.service.LoginSharedPreferenceService;
+import com.zhaori.simsun.service.PayeeService;
+
+public class QianFaShenQingActivity extends Activity {
+	private Intent intent = null;
+	private LoginSharedPreferenceService loginSp = null;
+	private int payee_id = 0;
+	private PayeeService ps = null;
+	private Payee p = null;
+	private TextView skgsEt, skzhEt, fkzhEt, jyrqEt = null;
+	private EditText fkjeEt = null;
+	private Dialog dialog = null;
+	private DatePicker dp = null;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		this.setContentView(R.layout.qianfashenqing);
+		loginSp = new LoginSharedPreferenceService(this);
+		ps = new PayeeService(this);
+		
+		skgsEt = (TextView) this.findViewById(R.id.skgs);
+		skzhEt = (TextView) this.findViewById(R.id.skzh);
+		fkzhEt = (TextView) this.findViewById(R.id.fkzh);
+		jyrqEt = (TextView) this.findViewById(R.id.jyrq);
+		fkjeEt = (EditText) this.findViewById(R.id.fkje);
+		
+		dp = new DatePicker(this);
+		initDateDialog();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		payee_id = loginSp.getSelectedPayeeId();
+		loginSp.clearSelectedPayeeId();
+		String new_payee_account = loginSp.getNewPayeeAccount();
+		loginSp.clearNewPayeeAccount();
+		String pay_account = loginSp.getPayAccount();
+		loginSp.clearPayAccount();
+//		String date = loginSp.getDealDate();
+//		loginSp.clearDealDate();
+		if(payee_id > 0) {
+			p = ps.getPayeeById(payee_id);
+			skgsEt.setText(p.getPayee_name());
+			skzhEt.setText(p.getPayee_account());
+		}
+		if(new_payee_account != null &&  !"".equals(new_payee_account)) {
+			skzhEt.setText(new_payee_account);
+		}
+		if(pay_account != null && !"".equals(pay_account)) {
+			fkzhEt.setText(pay_account);
+		}
+//		if(date != null && !"".equals(date)) {
+//			jyrqEt.setText(date);
+//		}
+		
+	}
+	
+	public void btnClick(View view) {
+		switch (view.getId()) {
+		case R.id.back:
+			QianFaShenQingActivity.this.finish();
+			intent = new Intent(QianFaShenQingActivity.this, DianZiJieSuanKaActivity.class);
+			startActivity(intent);
+			break;
+		case R.id.skgs_btn:
+//			QianFaShenQingActivity.this.finish();
+//			intent = new Intent(QianFaShenQingActivity.this, XuanZheShouKuanRenMingChengActivity.class);
+//			startActivity(intent);
+			
+			XuanZheShouKuanRenMingChengActivity.prepare(QianFaShenQingActivity.this, R.id.root);
+			intent = new Intent(QianFaShenQingActivity.this, XuanZheShouKuanRenMingChengActivity.class);
+			intent.putExtra("position", loginSp.getSelectedPayeePosition());
+			loginSp.clearSelectedPayeePostion();
+			startActivity(intent);
+			overridePendingTransition(0, 0);
+			break;
+			
+		case R.id.skzh_btn:
+//			QianFaShenQingActivity.this.finish();
+//			intent = new Intent(QianFaShenQingActivity.this, SheZhiShouKuanRenZhangHaoAcitivity.class);
+//			startActivity(intent);
+			
+			SheZhiShouKuanRenZhangHaoAcitivity.prepare(QianFaShenQingActivity.this, R.id.root);
+			intent = new Intent(QianFaShenQingActivity.this, SheZhiShouKuanRenZhangHaoAcitivity.class);
+			startActivity(intent);
+			overridePendingTransition(0, 0);
+			break;
+			
+		case R.id.fkzh_btn:
+			SheZhiFuKuanRenZhangHaoActivity.prepare(QianFaShenQingActivity.this, R.id.root);
+			intent = new Intent(QianFaShenQingActivity.this, SheZhiFuKuanRenZhangHaoActivity.class);
+			startActivity(intent);
+			overridePendingTransition(0, 0);
+			break;
+			
+		case R.id.jyrq_btn:
+//			SheZhiJiaoYiRiQiActivity.prepare(QianFaShenQingActivity.this, R.id.root);
+//			intent = new Intent(QianFaShenQingActivity.this, SheZhiJiaoYiRiQiActivity.class);
+//			startActivity(intent);
+//			overridePendingTransition(0, 0);
+			dialog.show();
+			break;
+			
+		case R.id.cz:
+			skgsEt.setText(null);
+			fkzhEt.setText(null);
+			skzhEt.setText(null);
+			jyrqEt.setText(null);
+			fkjeEt.setText(null);
+			break;
+			
+		case R.id.bc_btn:
+			if(checkInfo()) {
+				
+			}else {
+				Toast.makeText(this, "请填写完整的签发申请信息!", 0).show();
+			}
+			break;
+		}
+		
+	}
+	
+	
+	public boolean checkInfo() {
+		if(skgsEt.getText() == null || skzhEt.getText() == null || fkzhEt.getText() == null || fkjeEt.getText() == null || jyrqEt.getText() == null) {
+			return false;
+		}
+		return true;
+	}
+	
+	
+	public void initDateDialog() {
+		dialog = new AlertDialog.Builder(this)
+		.setTitle("设置交易日期")
+		.setView(dp)
+		.setPositiveButton("设置", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				String year = String.valueOf(dp.getYear());
+				String month = String.valueOf(dp.getMonth() + 1);
+				String day = String.valueOf(dp.getDayOfMonth());
+				String date = year + "-" + month + "-" + day;
+				jyrqEt.setText(date);
+			}
+		})
+		.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		})
+		.create();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		ps.closeDB();
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

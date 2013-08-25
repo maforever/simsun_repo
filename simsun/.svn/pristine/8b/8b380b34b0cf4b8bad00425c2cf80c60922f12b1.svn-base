@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background">
+    
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/top_background"
+        >
+        
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/jsk_fh"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true" 
+            android:onClick="btnClick"
+            />
+        
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xuanzeshouquanren_03"
+            android:layout_centerInParent="true" 
+            />
+        
+        <ImageView
+            android:id="@+id/cz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/jsk_cz"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" 
+            android:onClick="btnClick"
+            />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/klxg_background" 
+        android:layout_below="@+id/top"
+        android:layout_margin="20dp"
+        >
+        
+        <RelativeLayout 
+            android:id="@+id/ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            
+            <CheckBox
+                android:id="@+id/zhiding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true" 
+                android:layout_marginLeft="5dp"
+                />
+            
+            <LinearLayout
+                
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" 
+                android:layout_centerVertical="true"
+                >
+                <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/xuanzeshouquanren_07"
+                android:layout_toRightOf="@+id/zhiding"
+                android:layout_centerInParent="true" 
+                />
+            </LinearLayout>
+            
+
+            
+        </RelativeLayout>
+        
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" 
+                android:layout_below="@+id/ll"
+                >
+                
+                <EditText
+                    android:id="@+id/phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/xuanzeshouquanren_11" 
+                    android:hint="请输入手机号码"
+                    android:gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:inputType="phone"
+                    android:singleLine="true"
+                    />
+                
+                <EditText
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/xuanzeshouquanren_11"
+                    android:hint="请输入邮件地址" 
+                    android:gravity="center"
+                     android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:inputType="textEmailAddress"
+                    android:singleLine="true"
+                    />
+                
+            </LinearLayout>
+        
+    </RelativeLayout>
+	
+    
+    <RelativeLayout
+        android:id="@+id/down"
+        android:layout_below="@+id/up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/klxg_background" 
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        >
+        <RelativeLayout 
+            android:id="@+id/ll2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            
+            <CheckBox
+                android:id="@+id/xuanze"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true" 
+                android:layout_marginLeft="5dp"
+                />
+            
+            <LinearLayout
+                
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" 
+                android:layout_centerVertical="true"
+                >
+                <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/xuanzeshouquanren_15"
+                android:layout_toRightOf="@+id/zhiding"
+                android:layout_centerInParent="true" 
+                />
+            </LinearLayout>
+        </RelativeLayout>
+        
+        
+        <ListView
+            android:layout_below="@+id/ll2"
+            android:id="@+id/listView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:layout_margin="20dp"
+            android:listSelector="@drawable/index_gridview_selector"
+            >
+        </ListView>
+        
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/down"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        >
+        <ImageView
+            android:id="@+id/ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/kl_ok"
+            android:layout_centerInParent="true" 
+            android:onClick="btnClick"
+            />
+    </RelativeLayout>
+</RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

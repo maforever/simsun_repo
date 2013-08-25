@@ -1,0 +1,146 @@
+package com.zhaori.simsun;
+
+import java.util.Map;
+
+import com.zhaori.simsun.service.LoginSharedPreferenceService;
+import com.zhaori.simsun.utils.HttpUtils;
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.app.Activity;
+import android.content.Intent;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class LoginActivity extends Activity {
+	private EditText username, password = null;
+	private String username_str, password_str = null;
+	private CheckBox jzmm, zddl = null;
+	private TextView warning = null;
+	private boolean isLogin = true;
+	private boolean isAutoLogin = false;
+	private boolean isRemeber = false;
+	private Intent intent;
+	private MyHandler handler = new MyHandler();
+	private LoginSharedPreferenceService loginSp = null;
+	
+	private class MyHandler extends Handler {
+		@Override
+		public void handleMessage(Message msg) {
+			if(msg.what == 1) {
+//正式发布				
+				//isLogin = (Boolean) msg.obj;
+				if(isLogin) {
+					if(jzmm.isChecked()) {
+						loginSp.saveUsernamenAndPassword(username_str, password_str);
+					}
+					loginSp.setLoginAuto(jzmm.isChecked(), zddl.isChecked());
+					loginSp.saveCurrentAppUsername(username_str);
+					intent = new Intent(LoginActivity.this, IndexActivity.class);
+					startActivity(intent);
+				}else {
+					warning.setText(R.string.login_err);
+					warning.setVisibility(ViewGroup.VISIBLE);
+				}
+				//开发测试
+//				intent = new Intent(LoginActivity.this, IndexActivity.class);
+//				startActivity(intent);
+				
+			}
+		}
+	}
+	
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.login);
+        
+        this.username = (EditText) this.findViewById(R.id.username);
+        this.password = (EditText) this.findViewById(R.id.password);
+        this.warning = (TextView) this.findViewById(R.id.warning);
+        this.jzmm = (CheckBox) this.findViewById(R.id.jzmm);
+        this.zddl = (CheckBox) this.findViewById(R.id.zddl);
+        
+        loginSp = new LoginSharedPreferenceService(this);
+        init();
+        Log.i("a", "是否记住密码 : " + isRemeber);
+
+        if(isAutoLogin) {
+        	login();
+        }
+        
+        
+        jzmm.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//				if(isChecked) {
+//					Log.i("a", "isLogin = " + isLogin);
+//					if(isLogin) {
+//						loginSp.saveUsernamenAndPassword(username_str, password_str);
+//					}
+//				}
+			}
+		});
+        
+        zddl.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//				if(isChecked) {
+//					loadLoginInfo();
+//					isLogin = HttpUtils.login(username_str, password_str);
+//					handler.sendMessage(handler.obtainMessage(1, isLogin));
+//				}
+			}
+		});
+    }
+    
+    public void init() {
+    	loadLoginInfo();
+        if(isRemeber) {
+        	username.setText(username_str);
+        	password.setText(password_str);
+        }
+    	jzmm.setChecked(isRemeber);
+    	zddl.setChecked(isAutoLogin);
+    }
+    
+    public void loadLoginInfo() {
+    	Map<String, String> map = loginSp.getUsernameAndPassword();
+		username_str = map.get("username");
+		password_str = map.get("password");
+		isAutoLogin = loginSp.getLoginAuto();
+		isRemeber = loginSp.getIsRemeber();
+    }
+    
+    private void login() {
+    	new Thread(new Runnable() {
+			public void run() {
+				isLogin = HttpUtils.login(username_str, password_str);
+				handler.sendMessage(handler.obtainMessage(1, isLogin));
+			}
+		}).start();
+    }
+    
+    public void btnClick(View view)	{
+    	switch (view.getId()) {
+			case R.id.login_btn:
+				username_str = username.getText().toString();
+				password_str = password.getText().toString();
+				if( (username_str == null || "".equals(username_str)) || (password_str == null || "".equals(password_str))) {
+					warning.setText(R.string.login_null);
+					warning.setVisibility(ViewGroup.VISIBLE);
+				}else {
+					warning.setVisibility(ViewGroup.GONE);
+					login();
+				}
+			break;
+    	}
+    	
+    }
+
+}

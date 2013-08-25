@@ -1,0 +1,24 @@
+package com.zhaori.simsun.broadcastreceiver;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.widget.Toast;
+
+public class HeadsetPlugReceiver extends BroadcastReceiver {
+
+	public HeadsetPlugReceiver() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void onReceive(Context context, Intent intent) {
+		if(intent.hasExtra("state")) {
+			if(intent.getIntExtra("state", 0) == 0) {
+				Toast.makeText(context, "请插入耳机!", 0).show();
+			} else  if(intent.getIntExtra("state", 0) == 1) {
+				Toast.makeText(context, "已经插入耳机!", 0).show();
+			}
+		}
+	}
+}

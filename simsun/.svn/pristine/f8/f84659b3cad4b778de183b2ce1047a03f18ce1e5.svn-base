@@ -1,0 +1,20 @@
+package com.zhaori.simsun.service;
+
+import com.zhaori.simsun.dbopenhelper.DBOpenHelper;
+import com.zhaori.simsun.model.User;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
+public class UserService {
+	private SQLiteDatabase db = null;
+	private DBOpenHelper openHelper = null;
+	public UserService(Context context) {
+		openHelper = new DBOpenHelper(context);
+		db = openHelper.getReadableDatabase();
+	}
+	
+	public void addUser(User user) {
+		db.execSQL("insert into users (username, password, email, phone, examine) values (?, ?, ?, ?, ?)", new String[]{user.getUsername(), user.getPassword(), user.getEmail(), user.getPhone(), String.valueOf(user.getExamine())});
+	}
+}

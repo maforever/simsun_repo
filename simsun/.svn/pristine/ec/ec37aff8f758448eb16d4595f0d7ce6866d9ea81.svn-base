@@ -1,0 +1,62 @@
+package com.zhaori.simsun.service;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+
+public class LoginSharedPreferenceService {
+	private Context context;
+	public LoginSharedPreferenceService(Context context) {
+		this.context = context;
+	}
+	
+	public void saveCurrentAppUsername(String username) {
+		SharedPreferences sp = context.getSharedPreferences("current_app_info", Context.MODE_PRIVATE);
+		Editor editor = sp.edit();
+		editor.putString("app_username", username);
+		editor.commit();
+	}
+	
+	public String getCurrentAppUsername() {
+		SharedPreferences sp = context.getSharedPreferences("current_app_info", Context.MODE_PRIVATE);
+		String app_username = sp.getString("app_username", "");
+		return app_username;
+	}
+	
+	public void setLoginAuto(boolean isRemeber, boolean isAutoLogin) {
+		SharedPreferences sp = context.getSharedPreferences("login_info", Context.MODE_PRIVATE);
+		Editor editor = sp.edit();
+		editor.putBoolean("isRemeber", isRemeber);
+		editor.putBoolean("isAutoLogin", isAutoLogin);
+		editor.commit();
+	}
+	
+	public boolean getLoginAuto() {
+		SharedPreferences sp = context.getSharedPreferences("login_info", Context.MODE_PRIVATE);
+		return sp.getBoolean("isAutoLogin", false);
+	}
+	
+	public boolean getIsRemeber() {
+		SharedPreferences sp = context.getSharedPreferences("login_info", Context.MODE_PRIVATE);
+		return sp.getBoolean("isRemeber", false);
+	}
+	
+	public void saveUsernamenAndPassword(String username, String password) {
+		SharedPreferences sp = context.getSharedPreferences("login_info", Context.MODE_PRIVATE);
+		Editor editor = sp.edit();
+		editor.putString("username", username);
+		editor.putString("password", password);
+		editor.commit();
+	}
+	
+	public  Map<String, String> getUsernameAndPassword() {
+		Map<String, String> map = new HashMap<String, String>();
+		SharedPreferences sp = context.getSharedPreferences("login_info", Context.MODE_PRIVATE);
+		map.put("username", sp.getString("username", ""));
+		map.put("password", sp.getString("password", ""));
+		return map;
+	}
+}

@@ -1,0 +1,107 @@
+package com.zhaori.simsun;
+
+import java.util.ArrayList;
+
+import com.zhaori.simsun.model.Nrl;
+import com.zhaori.simsun.utils.HttpUtils;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class ShouQuanXinXiActivity extends Activity {
+	private Intent intent = null;
+	private TextView auth_keyTv, skgsTv, skzhTv, fkzhTv, fkjeTv = null;
+	private ArrayList<Nrl> nrls = new ArrayList<Nrl>();
+	private MyHandler handler = new MyHandler();
+	private Nrl n = null;
+	private String result = null;
+	private class MyHandler extends Handler {
+		@Override
+		public void handleMessage(Message msg) {
+			if(msg.what == 1) {
+				nrls = (ArrayList<Nrl>) msg.obj;
+				
+				if(nrls.size() > 0) {
+					Log.i("a", "nrls.size()   " + nrls.size());
+					n = nrls.get(nrls.size() - 1);
+					skgsTv.setText(n.getTo_name());
+					skzhTv.setText(n.getTo_account());
+					fkzhTv.setText(n.getFrom_account());
+					fkjeTv.setText(n.getQuantity() + "");
+					if(n.getStatus() == -1) {
+						auth_keyTv.setText("请求拒绝!");
+					}else if(n.getStatus() == 1) {
+						auth_keyTv.setText(n.getAuth_key());
+					}
+				}
+				
+			}
+			
+			if(msg.what == 2) {
+				result = (String) msg.obj;
+				if("-1".equals(result)) {
+					Toast.makeText(ShouQuanXinXiActivity.this, "保存授权码失败!", 0).show();
+				}else if("1".equals(result)) {
+					Toast.makeText(ShouQuanXinXiActivity.this, "保存授权码成功!!", 0).show();
+				}
+			}
+			
+		}
+	}
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		this.setContentView(R.layout.shouquanxinxi);
+		
+		skgsTv = (TextView) this.findViewById(R.id.skgs);
+		skzhTv = (TextView) this.findViewById(R.id.skzh);
+		fkzhTv = (TextView) this.findViewById(R.id.fkzh);
+		fkjeTv = (TextView) this.findViewById(R.id.fkje);
+		auth_keyTv = (TextView) this.findViewById(R.id.auth_key);
+		
+		getAuthResponse();
+		
+		
+		
+	}
+	
+	public void getAuthResponse() {
+		new Thread(new Runnable() {
+			public void run() {
+				nrls = HttpUtils.query_new_authed_request("http://www.pop-res.com:8888/query_new_authed_request", "2");
+				handler.sendMessage(handler.obtainMessage(1, nrls));
+			}
+		}).start();
+	}
+	
+	public void saveAuthKey() {
+		new Thread(new Runnable() {
+			public void run() {
+				result = HttpUtils.saveAuthKey("http://www.pop-res.com:8888/post_authed_request", String.valueOf(n.getIdx()));
+				handler.sendMessage(handler.obtainMessage(2, result));
+			}
+		}).start();
+	}
+	
+	public void btnClick(View view) {
+		switch (view.getId()) {
+		case R.id.back:
+			ShouQuanXinXiActivity.this.finish();
+			intent = new Intent(ShouQuanXinXiActivity.this, IndexActivity.class);
+			startActivity(intent);
+			break;
+			
+		case R.id.bc:
+			saveAuthKey();
+			break;
+		}
+	}
+}

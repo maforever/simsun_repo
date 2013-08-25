@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="app_name">授权棒</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_login">授权棒</string>
+	<string name="login_err">用户名或密码错误</string>
+	<string name="login_null">请填写用户名或密码</string>
+</resources>

@@ -1,0 +1,121 @@
+package com.zhaori.simsun.utils;
+
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+import com.zhaori.simsun.service.LoginSharedPreferenceService;
+
+import android.content.Context;
+import android.os.DeadObjectException;
+import android.util.Log;
+
+public class HttpUtils {
+	
+	//登录
+	public static boolean login(Context context,String username, String password) {
+		String urlStr = "http://www.pop-res.com:8888/login?username=" + username + "&password=" + password;
+		Log.i("a", "访问地址: " + urlStr);
+		try {
+			URL url = new URL(urlStr);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setConnectTimeout(3000);
+			if(conn.getResponseCode() == 200) {
+				InputStream is = conn.getInputStream();
+				String result = StreamTool.readStream(is);
+				Log.i("a", "登录后获得的短信息:" + result);
+				if(result != null && "-1,-1".equals(result)) {
+					return false;
+				}else {
+					Log.i("a", "登录后获得的短信息:" + result);
+					String[] values = result.split(",");
+					LoginSharedPreferenceService loginSp = new LoginSharedPreferenceService(context);
+					loginSp.setLoginUserInfo(values[0], values[1], values[2], values[3]);
+					
+				}
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Log.i("a", "登录失败:");
+		return false;
+	}
+	
+	//发起授权申请
+	public static String postRequest(String urlStr, HashMap<String, String> values) {
+		List<NameValuePair> datas = new ArrayList<NameValuePair>();
+		String result = null;
+		StringBuffer sb = new StringBuffer();
+		for(Map.Entry<String, String> entry : values.entrySet() ) {
+			datas.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+			sb.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
+		}
+		
+		Log.i("a", sb.toString());
+		
+		HttpPost request = new HttpPost(urlStr);
+		try {
+			request.setEntity(new UrlEncodedFormEntity(datas, "UTF-8"));
+			HttpClient client = new DefaultHttpClient();
+			HttpResponse response = client.execute(request);
+			if(response.getStatusLine().getStatusCode() == 200) {
+				result = EntityUtils.toString(response.getEntity());
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	//查询申请授权信息
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

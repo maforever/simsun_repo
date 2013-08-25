@@ -1,0 +1,93 @@
+package com.zhaori.simsun;
+
+import java.util.ArrayList;
+
+import com.zhaori.simsun.adapter.XuanZeShouKuanRenMingChengAdapter;
+import com.zhaori.simsun.model.Payee;
+import com.zhaori.simsun.service.LoginSharedPreferenceService;
+import com.zhaori.simsun.service.PayeeService;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
+public class XuanZheShouKuanRenMingChengActivity extends Activity {
+	private ListView listView = null;
+	private ArrayList<Payee> payees = new ArrayList<Payee>();
+	private PayeeService ps = null;
+	private LoginSharedPreferenceService loginSp = null;
+	private XuanZeShouKuanRenMingChengAdapter adapter = null;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		this.setContentView(R.layout.xianzeshoukuanrenmingcheng);
+		
+		listView = (ListView) this.findViewById(R.id.listView);
+		ps = new PayeeService(this);
+		loginSp = new LoginSharedPreferenceService(this);
+		
+		getDatas();
+		listViewAdapter();
+		listView.setOnItemClickListener(new OnItemClickListenerImpl());
+	}
+	
+	private class OnItemClickListenerImpl implements OnItemClickListener {
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			adapter.setSelected(position);
+		}
+	}
+	
+	public void listViewAdapter() {
+		adapter = new XuanZeShouKuanRenMingChengAdapter(this, payees, R.layout.shouguanren_listview_item);
+		listView.setAdapter(adapter);
+	}
+	
+	public void getDatas() {
+		payees = ps.listPayee(loginSp.getCurrentAppUsername());
+	}
+
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		ps.closeDB();
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background"
+    >
+    
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/top_background" 
+        >
+        
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/jsk_fh"
+            android:layout_centerVertical="true" 
+            android:onClick="btnClick"
+            />
+        
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/koulingshezhiyuxiugai_txt_img"
+            android:layout_centerInParent="true" 
+            />
+    </RelativeLayout>
+    
+    
+    
+    <RelativeLayout
+        android:id="@+id/set"
+        android:layout_margin="5dp"
+        android:layout_below="@+id/top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/klxg_background" 
+        >
+        <ImageView
+            android:id="@+id/setTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/denglukoulingshezhi_txt_img" 
+            />
+        
+        <LinearLayout
+            android:layout_below="@+id/setTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" 
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/querenkouling_txt_img"
+                    android:layout_gravity="center_vertical" 
+                    />
+                <EditText
+                    android:id="@+id/srkl1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/klsz_input_background" 
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:hint="请输入旧口令"
+                    />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" 
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/querenkouling_txt_img"
+                    android:layout_gravity="center_vertical" 
+                    />
+                <EditText
+                    android:id="@+id/qrkl1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/klsz_input_background" 
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:hint="请输入新口令"
+                    />
+            </LinearLayout>
+            
+			
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:id="@+id/ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/kl_ok"
+                    android:onClick="btnClick"
+                    />
+                
+            </LinearLayout>
+            
+        </LinearLayout>
+    </RelativeLayout>
+    
+    
+    
+        <RelativeLayout
+        android:id="@+id/update"
+        android:layout_margin="5dp"
+        android:layout_below="@+id/set"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/klxg_background" 
+        >
+        <ImageView
+            android:id="@+id/updateTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/denglukoulingxiugai_txt_img" 
+            />
+        
+        <LinearLayout
+            android:layout_below="@+id/updateTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" 
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/denglukouling_txt_img"
+                    android:layout_gravity="center_vertical" 
+                    />
+                <EditText
+                    android:id="@+id/dlkl2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/klsz_input_background" 
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:hint="请输入旧口令"
+                    />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" 
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                >
+                
+                <ImageView
+                    android:id="@+id/xkl2img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/xinkouling_txt_img"
+                    android:layout_gravity="center_vertical" 
+                    />
+                <EditText
+                    android:id="@+id/xkl2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/klsz_input_background" 
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:hint="请输入新口令"
+                    />
+                    
+            </LinearLayout>
+            
+			
+                        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" 
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                >
+                
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/querenkouling_txt_img"
+                    android:layout_gravity="center_vertical" 
+                    />
+                <EditText
+                    android:id="@+id/qrkl2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/klsz_input_background" 
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:hint="请再次输入新口令"
+                    />
+                    
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="10dp"
+                >
+                <ImageView
+                    android:id="@+id/ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/kl_ok"
+                    android:onClick="btnClick"
+                    />
+                
+            </LinearLayout>
+            
+        </LinearLayout>
+        
+        
+        
+        
+        
+    </RelativeLayout>
+    
+
+        
+        
+                <RelativeLayout
+                    android:layout_below="@+id/update"
+                    android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:layout_marginTop="40dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="40dp"
+                android:background="@drawable/zhaohuimima_txt_img" />
+
+            <ImageView
+                android:id="@+id/btn1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/right_btn_img" 
+                android:onClick="btnClick"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn1" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#ffffff" 
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"/>
+            </RelativeLayout>
+        </RelativeLayout>
+    
+    
+    
+</RelativeLayout>

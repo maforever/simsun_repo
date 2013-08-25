@@ -1,0 +1,326 @@
+package com.zhaori.simsun.utils;
+
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.HttpConnection;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+import com.apns.service.HttpRequest;
+import com.zhaori.simsun.model.Nrl;
+import com.zhaori.simsun.service.LoginSharedPreferenceService;
+
+import android.content.Context;
+import android.os.DeadObjectException;
+import android.util.Log;
+
+public class HttpUtils {
+	
+	//登录
+	public static boolean login(Context context,String username, String password) {
+		String urlStr = "http://www.pop-res.com:8888/login?username=" + username + "&password=" + password;
+		Log.i("a", "访问地址: " + urlStr);
+		try {
+			URL url = new URL(urlStr);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setConnectTimeout(3000);
+			if(conn.getResponseCode() == 200) {
+				InputStream is = conn.getInputStream();
+				String result = StreamTool.readStream(is);
+				Log.i("a", "登录后获得的短信息:" + result);
+				if(result != null && "-1,-1".equals(result)) {
+					return false;
+				}else {
+					Log.i("a", "登录后获得的短信息:" + result);
+					String[] values = result.split(",");
+					LoginSharedPreferenceService loginSp = new LoginSharedPreferenceService(context);
+					loginSp.setLoginUserInfo(values[0], values[1], values[2], values[3]);
+					
+				}
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Log.i("a", "登录失败:");
+		return false;
+	}
+	
+	//发起授权申请
+	public static String postRequest(String urlStr, HashMap<String, String> values) {
+		List<NameValuePair> datas = new ArrayList<NameValuePair>();
+		String result = null;
+		StringBuffer sb = new StringBuffer();
+		for(Map.Entry<String, String> entry : values.entrySet() ) {
+			datas.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+			sb.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
+		}
+		
+		Log.i("a", sb.toString());
+		
+		HttpPost request = new HttpPost(urlStr);
+		try {
+			request.setEntity(new UrlEncodedFormEntity(datas, "UTF-8"));
+			HttpClient client = new DefaultHttpClient();
+			HttpResponse response = client.execute(request);
+			if(response.getStatusLine().getStatusCode() == 200) {
+				result = EntityUtils.toString(response.getEntity());
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	//授权人获取申请的授权信息
+	public static  ArrayList<Nrl> listPostedRequest(String urlStr, String examine_userid) {
+		ArrayList<Nrl> nrls = new ArrayList<Nrl>();
+		Nrl n = null;
+		
+		ArrayList<NameValuePair> datas = new ArrayList<NameValuePair>();
+		datas.add(new BasicNameValuePair("examine_userid", examine_userid));
+		HttpPost request = new HttpPost(urlStr);
+		try {
+			request.setEntity(new UrlEncodedFormEntity(datas, "UTF-8"));
+			HttpClient client = new DefaultHttpClient();
+			HttpResponse response = client.execute(request);
+			if(response.getStatusLine().getStatusCode() == 200) {
+				String result = EntityUtils.toString(response.getEntity());
+//				Log.i("a", "结果:" + result);
+				
+				String[] results = result.split("\\|");
+				
+				for(int i = 0 ; i < results.length; i++) {
+					String[] params = results[i].split(",");
+					n = new Nrl();
+					n.setIdx(Integer.parseInt(params[0]));
+					n.setTime(params[1]);
+					n.setTo_name(params[2]);
+					n.setTo_account(params[3]);
+					n.setFrom_account(params[4]);
+					n.setQuantity(Float.parseFloat(params[5]));
+					n.setRequest_date(params[6]);
+					n.setExamine_email(params[7]);
+					n.setExamine_phone(params[8]);
+					n.setExamine_userid(Integer.parseInt(params[9]));
+					n.setRequest_userid(Integer.parseInt(params[10]));
+					n.setStatus(Integer.parseInt(params[11]));
+					n.setBusiness_type(Integer.parseInt(params[12]));
+					n.setAuth_key(params[13]);
+					n.setNotify_sms(Integer.parseInt(params[14]));
+					n.setNotify_email(Integer.parseInt(params[15]));
+					
+					nrls.add(n);
+				}
+				return nrls;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+//		try {
+//			URL url = new URL(urlStr + "?examine_userid=" + examine_userid);
+//			Log.i("a", url.getPath());
+//			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//			conn.setRequestMethod("GET");
+//			conn.setConnectTimeout(5000);
+//			if(conn.getResponseCode() == 200) {
+//				String result = StreamTool.readStream(conn.getInputStream());
+//				Log.i("a", "结果:" + result);
+//				
+//				String[] results = result.split("|");
+//				for(int i = 0 ; i < results.length; i++) {
+//					String[] params = results[i].split(",");
+//					n = new Nrl();
+//					n.setIdx(Integer.parseInt(params[0]));
+//					n.setTime(params[1]);
+//					n.setTo_name(params[2]);
+//					n.setTo_account(params[3]);
+//					n.setFrom_account(params[4]);
+//					n.setQuantity(Integer.parseInt(params[5]));
+//					n.setRequest_date(params[6]);
+//					n.setExamine_email(params[7]);
+//					n.setExamine_phone(params[8]);
+//					n.setExamine_userid(Integer.parseInt(params[9]));
+//					n.setStatus(Integer.parseInt(params[10]));
+//					n.setBusiness_type(Integer.parseInt(params[11]));
+//					n.setAuth_key(params[12]);
+//					n.setNotify_sms(Integer.parseInt(params[13]));
+//					n.setNotify_email(Integer.parseInt(params[14]));
+//					
+//					nrls.add(n);
+//				}
+//				Log.i("a", "http utils nrls 的个数为 " + nrls.size());
+//				return nrls;
+//			}else {
+//				Log.i("a", "访问失败");
+//			}
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		return nrls;
+	}
+	
+	
+	
+	//调用极速API
+	public static String postMsg(String urlStr, Map<String, String> params) {
+		ArrayList<NameValuePair> datas = new ArrayList<NameValuePair>();
+		String result = null;
+		for(Map.Entry<String, String> entry : params.entrySet()) {
+			datas.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+		}
+		
+		HttpClient client = new DefaultHttpClient();
+		HttpPost request = new HttpPost(urlStr);
+		try {
+			request.setEntity(new UrlEncodedFormEntity(datas, "UTF-8"));
+			HttpResponse response = client.execute(request);
+			if(response.getStatusLine().getStatusCode() == 200) {
+				result = EntityUtils.toString(response.getEntity());
+				Log.i("a", "result : = " + result);
+				return result;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	//申请人获得所有状态为1,-1(通过， 未通过)的授权信息
+	public static ArrayList<Nrl> query_new_authed_request(String urlStr, String userid) {
+		ArrayList<Nrl> nrls = new ArrayList<Nrl>();
+		Nrl n = null;
+		URL url;
+		try {
+			url = new URL(urlStr + "?userid=" + userid);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setConnectTimeout(5000);
+			if(conn.getResponseCode() == 200) {
+				String result = StreamTool.readStream(conn.getInputStream());
+				Log.i("a", "申请人获得所有状态为1,-1(通过， 未通过)的授权信息 " + result);
+				
+				String[] results = result.split("\\|");
+				Log.i("a", "results changdu " + results.length);
+				for(int i = 0 ; i < results.length; i++) {
+					String[] params = results[i].split(",");
+					n = new Nrl();
+					n.setIdx(Integer.parseInt(params[0]));
+					n.setTime(params[1]);
+					n.setTo_name(params[2]);
+					n.setTo_account(params[3]);
+					n.setFrom_account(params[4]);
+					n.setQuantity(Float.parseFloat(params[5]));
+					n.setRequest_date(params[6]);
+					n.setExamine_email(params[7]);
+					n.setExamine_phone(params[8]);
+					n.setExamine_userid(Integer.parseInt(params[9]));
+					n.setRequest_userid(Integer.parseInt(params[10]));
+					n.setStatus(Integer.parseInt(params[11]));
+					n.setBusiness_type(Integer.parseInt(params[12]));
+					n.setAuth_key(params[13]);
+					n.setNotify_sms(Integer.parseInt(params[14]));
+					n.setNotify_email(Integer.parseInt(params[15]));
+					nrls.add(n);
+				}
+				
+				Log.i("a", "集合 changdu " + nrls.size());
+				for(Nrl nn : nrls) {
+					Log.i("a", nn.toString());
+				}
+				
+				return nrls;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return nrls;
+	}
+	
+	//授权人设置状态
+	public static String update_auth_key(String urlStr, String idx, String authkey, String status, String userid) {
+		String result = null;
+		urlStr = urlStr + "?idx=" + idx + "&authkey=" + authkey + "&status=" + status;
+		try {
+			URL url = new URL(urlStr);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setConnectTimeout(5000);
+			conn.setRequestMethod("GET");
+			if(conn.getResponseCode() == 200) {
+				result = StreamTool.readStream(conn.getInputStream());
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	//申请人收到授权码并保存
+	public static String saveAuthKey(String urlStr, String idx) {
+		String result = null;
+		try {
+			URL url = new URL(urlStr + "?idx=" + idx);
+			HttpURLConnection conn =  (HttpURLConnection) url.openConnection();
+			conn.setConnectTimeout(5000);
+			conn.setRequestMethod("GET");
+			if(conn.getResponseCode() == 200) {
+				result = StreamTool.readStream(conn.getInputStream());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

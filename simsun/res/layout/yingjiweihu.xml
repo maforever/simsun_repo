@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background" 
+    android:id="@+id/root">
+
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/top_background" >
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/jsk_fh"
+            android:onClick="btnClick" />
+
+        <TextView
+            android:text="应急维护"
+            android:textSize="20dp"
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+             />
+
+        <ImageView
+            android:id="@+id/cz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/jsk_cz"
+            android:onClick="btnClick" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/klxg_background" >
+
+        			
+        
+        <LinearLayout
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" 
+            >
+
+            <TextView
+                android:layout_marginTop="10dp"
+			    android:text="卡片挂失申请"
+			    android:textColor="#000000"
+			    android:textSize="20dp"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_gravity="center"
+			    />
+            
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                
+                
+                <TextView
+                    android:text="卡        号:"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:id="@+id/txt_img1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                     />
+
+                <TextView
+                    android:id="@+id/kahao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="60dp"
+                    android:layout_toRightOf="@+id/txt_img1"
+                    android:background="@drawable/klsz_input_background"
+                    android:gravity="center"
+                    android:singleLine="true" 
+                    android:textColor="#000000"
+                    android:textSize="15dp"
+                    />
+
+                <ImageButton
+                    android:id="@+id/kh_btn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/jsk_jt"
+                    android:onClick="btnClick" />
+            </RelativeLayout>
+ 
+            <RelativeLayout
+                android:id="@+id/skzh_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+               	>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:text="口        令:"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:id="@+id/txt_img3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                     />
+
+                <EditText
+                    android:id="@+id/kouling"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="60dp"
+                    android:layout_toRightOf="@+id/txt_img3"
+                    android:background="@drawable/klsz_input_background"
+                    android:gravity="center"
+                    android:singleLine="true" 
+                    android:textColor="#000000"
+                    android:textSize="15dp"
+                    android:password="true"/>
+            </RelativeLayout>
+            
+            
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:text="确认口令:"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:id="@+id/txt_img3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                     />
+
+                <EditText
+                    android:id="@+id/querenkouling"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="60dp"
+                    android:layout_toRightOf="@+id/txt_img3"
+                    android:background="@drawable/klsz_input_background"
+                    android:gravity="center"
+                    android:singleLine="true" 
+                    android:textColor="#000000"
+                    android:textSize="15dp"
+                    android:password="true"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/content"
+        android:layout_marginTop="100dp"
+        >
+
+        <ImageView
+            android:id="@+id/fs_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/jsk_fs" 
+            android:layout_centerInParent="true"
+            android:onClick="btnClick"
+            android:layout_marginBottom="80dp"/>
+    </RelativeLayout>
+
+</RelativeLayout>

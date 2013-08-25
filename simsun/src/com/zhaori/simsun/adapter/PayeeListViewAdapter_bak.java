@@ -1,0 +1,105 @@
+package com.zhaori.simsun.adapter;
+
+import java.util.ArrayList;
+
+import com.zhaori.simsun.R;
+import com.zhaori.simsun.model.Payee;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class PayeeListViewAdapter_bak extends BaseAdapter {
+	private Context context;
+	private ArrayList<Payee> payees;
+	private int resourceId;
+	private LayoutInflater inflater = null;
+	
+	public PayeeListViewAdapter_bak(Context context, ArrayList<Payee> payees, int resourceId) {
+		this.context = context;
+		this.payees = payees;
+		this.resourceId = resourceId;
+		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	}
+	
+	public int getCount() {
+		return payees.size();
+	}
+
+	public Object getItem(int position) {
+		return position;
+	}
+
+	public long getItemId(int position) {
+		return position;
+	}
+
+	public View getView(int position, View convertView, ViewGroup parent) {
+		TextView num = null;
+		TextView name = null;
+		ImageView btn = null;
+		if(convertView == null) {
+			convertView = inflater.inflate(resourceId, null);
+			num = (TextView) convertView.findViewById(R.id.num);
+			name = (TextView) convertView.findViewById(R.id.contact_name);
+			btn = (ImageView) convertView.findViewById(R.id.btn);
+			DateWrapper dw = new DateWrapper(num, name, btn);
+			convertView.setTag(dw);
+		}else {
+			DateWrapper dw = (DateWrapper) convertView.getTag();
+			num = dw.num;
+			name = dw.name;
+			btn = dw.btn;
+		}
+		num.setText(payees.get(position).getPayee_id() + "");
+		name.setText(payees.get(position).getPayee_name());
+		final int location = position;
+		btn.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				Toast.makeText(context, "点击的信息ID 为" + payees.get(location).getPayee_id(), 0).show();
+			}
+		});
+		
+		
+		return convertView;
+		
+	}
+	
+	public class DateWrapper {
+		public TextView num;
+		public TextView name;
+		public ImageView btn;
+		public DateWrapper(TextView num, TextView name, ImageView btn) {
+			this.num = num;
+			this.name = name;
+			this.btn = btn;
+		}
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

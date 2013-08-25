@@ -1,0 +1,164 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background" >
+
+    <ImageView
+        android:id="@+id/login_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/login_top" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/login_top" >
+
+        <LinearLayout
+            android:id="@+id/login_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_title" />
+        </LinearLayout>
+
+        <TableLayout
+            android:id="@+id/tl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/login_title"
+            android:layout_marginTop="40dp" >
+
+            <TableRow android:gravity="center" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:background="@drawable/username_txt_img" />
+
+                <EditText
+                    android:id="@+id/username"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/login_input_background"
+                    android:gravity="center"
+                    android:hint="手机账号/邮箱地址" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="10dp"
+                android:gravity="center" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:background="@drawable/password_txt_img" />
+
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/login_input_background"
+                    android:gravity="center"
+                    android:hint="请输入密码"
+                    android:password="true" />
+            </TableRow>
+        </TableLayout>
+        
+        <RelativeLayout
+            android:layout_alignLeft="@+id/tl"
+            android:id="@+id/checksrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tl"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp" 
+            android:gravity="center">
+			
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" 
+                android:gravity="center"
+                >
+            <ImageView
+                android:id="@+id/jzmmimage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/jizhumima_txt_img" 
+                />
+
+            <CheckBox
+                android:id="@+id/jzmm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            
+            <ImageView
+                android:id="@+id/zddlimage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/zidongdenglu_txt_img" />
+
+            <CheckBox
+                android:id="@+id/zddl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            </LinearLayout>
+            
+                
+        </RelativeLayout>
+
+        
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/login_bottom_txt"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            >
+            
+            <TextView
+                android:id="@+id/warning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30px"
+                android:textColor="#ff0000"
+                android:visibility="gone"
+                />
+            
+            <ImageView
+                android:id="@+id/login_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/logn_btn"
+                android:layout_marginBottom="20dp"
+                android:onClick="btnClick"
+                />
+            
+        </LinearLayout>
+        
+        
+        <ImageView
+            android:id="@+id/login_bottom_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/login_bottom_txt_img" />
+    </RelativeLayout>
+
+</RelativeLayout>

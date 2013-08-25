@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="35dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginBottom="15dp"
+    android:layout_marginRight="70dp">
+    
+    <RelativeLayout
+        android:id="@+id/info_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="35dp"
+        android:layout_alignParentRight="true"
+        >
+		<TextView
+		    android:id="@+id/company_name"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="万达实业股份有限公司"
+		    android:layout_centerVertical="true"
+		    android:textSize="20dp"
+		    />        
+		<ImageView
+		    android:id="@+id/listview_btn"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:background="@drawable/company_unselect" 
+		    android:layout_centerVertical="true"
+		    android:layout_alignParentRight="true"
+		    android:layout_marginRight="10dp"
+		    />
+
+    </RelativeLayout>
+    
+
+</RelativeLayout>

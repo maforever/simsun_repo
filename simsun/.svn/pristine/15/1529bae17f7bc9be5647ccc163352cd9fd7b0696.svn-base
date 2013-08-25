@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="@drawable/login_background">
+    
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/top_background" 
+        >
+        
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/jsk_fh"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true" 
+            android:onClick="btnClick"
+            />
+        
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shoukuanrenguanli_top"
+            android:layout_centerInParent="true" 
+            />
+        
+    </RelativeLayout>
+    
+    
+     <RelativeLayout
+        android:id="@+id/set"
+        android:layout_margin="5dp"
+        android:layout_below="@+id/top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/klxg_background" 
+        >
+        <ImageView
+            android:id="@+id/setTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/tianjiashoukuanren_txt_img" 
+            />
+        
+        <LinearLayout
+            android:layout_below="@+id/setTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" 
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                >
+                <ImageView
+                    android:id="@+id/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/shoukuanrenguanli_03"
+                    android:layout_gravity="center_vertical" 
+                    />
+                <EditText
+                    android:id="@+id/skmc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/klsz_input_background" 
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:hint="请输入姓名或公司名称"
+                    />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" 
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/shoukuanrenguanli_07"
+                    android:layout_gravity="center_vertical" 
+                    />
+                <EditText
+                    android:id="@+id/skzh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/klsz_input_background" 
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:numeric="integer"
+                    android:hint="请输入收款账号"
+                    android:singleLine="true"
+                    />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" 
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/shoukuanrenguanli_11"
+                    android:layout_gravity="center_vertical" 
+                    />
+                <EditText
+                    android:id="@+id/khxx"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/klsz_input_background" 
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:hint="请输入开户行信息"
+                    android:singleLine="true"
+                    />
+            </LinearLayout>
+            
+            
+            
+			
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="10dp"
+                >
+                <ImageView
+                    android:id="@+id/ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/kl_ok"
+                    android:onClick="btnClick"
+                    />
+                
+            </LinearLayout>
+            
+        </LinearLayout>
+    </RelativeLayout>
+    
+    
+    
+        <RelativeLayout
+        android:id="@+id/update"
+        android:layout_margin="5dp"
+        android:layout_below="@+id/set"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/klxg_background" 
+        >
+        <ImageView
+            android:id="@+id/updateTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/guanlishoukuanren_txt_img" 
+            />
+        
+        <LinearLayout
+            android:layout_below="@+id/updateTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            
+			<ListView
+			    android:layout_margin="10dp"
+			    android:id="@+id/shoukuanrenlistView"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    >
+			    
+			</ListView>
+            
+        </LinearLayout>
+        
+        
+        
+        
+        
+    </RelativeLayout>
+    
+    
+</RelativeLayout>
